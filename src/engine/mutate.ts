@@ -6,9 +6,9 @@
  * multiplicatively so a 100 Hz thump and a 5 kHz zap both move musically.
  * The seed is always replaced so noise-based layers get fresh grains.
  */
-import type { Recipe } from './types';
-import { createRng } from './random';
-import { LAYER_PARAMS, clampParam, newLayerId } from './params';
+import type { Recipe } from './types.js';
+import { createRng } from './random.js';
+import { LAYER_PARAMS, clampParam, newLayerId } from './params.js';
 
 export interface MutateOptions {
   /** How far to stray, 0..1. 0.15 is a subtle sibling, 0.6 is a cousin. */

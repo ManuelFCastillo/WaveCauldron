@@ -5,7 +5,7 @@
  * ANTHROPIC_API_KEY in the Vercel project (or in .env.local for `vite`).
  */
 import Anthropic from '@anthropic-ai/sdk';
-import { BrewError, brewRecipe, validateBrewRequest } from '../src/ai/brew';
+import { BrewError, brewRecipe, validateBrewRequest } from '../src/ai/brew.js';
 
 export const config = { maxDuration: 60 };
 

@@ -2,8 +2,8 @@
  * Starter recipes. Each one is a small "sound recipe" a developer can play,
  * mutate and export as-is, or use as a starting point.
  */
-import type { Layer, Recipe } from './types';
-import { defaultLayer, defaultRecipe } from './params';
+import type { Layer, Recipe } from './types.js';
+import { defaultLayer, defaultRecipe } from './params.js';
 
 export type PresetCategory = 'Magic' | 'Combat' | 'Retro' | 'UI' | 'World';
 

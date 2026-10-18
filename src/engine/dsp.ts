@@ -3,8 +3,8 @@
  * sample math over Float32Arrays so it runs identically in the browser, in
  * Node (CLI export) and in tests.
  */
-import type { FilterType } from './types';
-import type { Rng } from './random';
+import type { FilterType } from './types.js';
+import type { Rng } from './random.js';
 
 // ---------------------------------------------------------------------------
 // Noise sources

@@ -5,8 +5,8 @@
  */
 import Anthropic from '@anthropic-ai/sdk';
 import { zodOutputFormat } from '@anthropic-ai/sdk/helpers/zod';
-import { parseRecipe, randomSeed, type Recipe } from '../engine';
-import { BrewOutput, SYSTEM_PROMPT, buildUserMessage, type BrewRequest } from './schema';
+import { parseRecipe, randomSeed, type Recipe } from '../engine/index.js';
+import { BrewOutput, SYSTEM_PROMPT, buildUserMessage, type BrewRequest } from './schema.js';
 
 export const BREW_MODEL = 'claude-opus-5-5';
 export const MAX_PROMPT_LENGTH = 600;
