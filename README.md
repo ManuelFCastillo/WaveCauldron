@@ -13,6 +13,8 @@ Everything runs in the browser. No accounts, no uploads, no samples to license: 
 - **Export.** Mono 16-bit WAV at 44.1 kHz, ready for Unity, Godot, Unreal, Phaser, or anything else. Recipes export as JSON and round-trip through the URL hash.
 - **Batch CLI.** Regenerate all of a project's sounds from recipes as a build step.
 - Undo/redo, keyboard shortcuts (`Space` play, `M` mutate, `Ctrl+Z` undo), auto-audition on change.
+- **Two skins.** The regular teal studio, and an **October** skin (orange, purple, moon and bats) that switches on by itself during October. Toggle with the sun/moon button; the choice is remembered.
+- **Desktop and mobile.** Sidebar + toolbar on wide screens; stacked cards with a Recipes / Play / Studio bottom bar on phones.
 
 ## Getting started
 

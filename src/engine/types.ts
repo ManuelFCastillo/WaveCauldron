@@ -77,6 +77,8 @@ export interface EchoSettings {
 export interface Recipe {
   version: 1;
   name: string;
+  /** One line about what the sound is for. */
+  description?: string;
   /** Seed for every random element of the render (noise). Same seed, same sound. */
   seed: number;
   /** Master gain, 0..1. */

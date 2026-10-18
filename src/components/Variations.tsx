@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { DEFAULT_SAMPLE_RATE, encodeWav, renderRecipe, type Recipe } from '../engine';
 import { playSamples } from '../audio/player';
 import { downloadBlob, slugify } from '../utils/download';
+import { Icon } from './Icon';
 
 interface VariationsProps {
   variations: Recipe[];
@@ -24,23 +25,34 @@ export function Variations({ variations, onUse, onClear }: VariationsProps) {
   };
 
   return (
-    <section className="variations">
-      <header>
-        <h3>Variations</h3>
+    <section className="card variations">
+      <header className="card-header">
+        <span className="card-icon">
+          <Icon name="cube" size={18} />
+        </span>
+        <h4>Variations</h4>
         <span className="spacer" />
-        <button onClick={exportAll}>Export all WAV</button>
-        <button onClick={onClear}>Clear</button>
+        <button onClick={exportAll}>
+          <Icon name="download" /> Export all
+        </button>
+        <button className="ghost" onClick={onClear} title="Clear variations">
+          <Icon name="trash" />
+        </button>
       </header>
       <div className="variation-grid">
         {variations.map((v, i) => (
           <div className="variation" key={v.seed + ':' + i}>
             <span className="variation-name">{v.name}</span>
-            <button className="primary" onClick={() => playSamples(rendered[i], DEFAULT_SAMPLE_RATE)}>
-              ▶
+            <button className="primary icon-only" onClick={() => playSamples(rendered[i], DEFAULT_SAMPLE_RATE)} title="Play">
+              <Icon name="play" />
             </button>
             <button onClick={() => onUse(v)}>Use</button>
-            <button onClick={() => downloadBlob(encodeWav(rendered[i], DEFAULT_SAMPLE_RATE), `${slugify(v.name)}.wav`, 'audio/wav')}>
-              WAV
+            <button
+              className="ghost"
+              title="Export WAV"
+              onClick={() => downloadBlob(encodeWav(rendered[i], DEFAULT_SAMPLE_RATE), `${slugify(v.name)}.wav`, 'audio/wav')}
+            >
+              <Icon name="download" />
             </button>
           </div>
         ))}
