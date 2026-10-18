@@ -19,6 +19,7 @@ export function parseRecipe(input: unknown): Recipe {
   return {
     version: 1,
     name: typeof r.name === 'string' ? r.name : base.name,
+    ...(typeof r.description === 'string' && r.description ? { description: r.description } : {}),
     seed: num(r.seed, base.seed) >>> 0,
     masterGain: clamp(num(r.masterGain, base.masterGain), 0, 1),
     normalize: typeof r.normalize === 'boolean' ? r.normalize : base.normalize,

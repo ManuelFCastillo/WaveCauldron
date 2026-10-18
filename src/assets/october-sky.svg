@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420">
+  <defs>
+    <radialGradient id="moon" cx="40%" cy="35%" r="65%">
+      <stop offset="0" stop-color="#ffe3b0"/>
+      <stop offset="0.55" stop-color="#ffb24d"/>
+      <stop offset="1" stop-color="#e67a22"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ff9a2e" stop-opacity="0.55"/>
+      <stop offset="0.5" stop-color="#ff7a1a" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#ff7a1a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <circle cx="690" cy="130" r="230" fill="url(#glow)"/>
+  <circle cx="690" cy="130" r="78" fill="url(#moon)"/>
+  <circle cx="660" cy="105" r="9" fill="#e38a2d" opacity="0.35"/>
+  <circle cx="715" cy="150" r="14" fill="#e38a2d" opacity="0.3"/>
+  <circle cx="700" cy="95" r="5" fill="#e38a2d" opacity="0.3"/>
+  <!-- castle silhouette on the moon -->
+  <path fill="#120820" d="M612 208h22v-26h6v-10l5-8 5 8v10h6v-18h8v18h6v-14l5-7 5 7v14h8v-30h10v30h7v-12h6v12h8v-22l6-10 6 10v22h8v-16h6v16h22v12H612z"/>
+  <!-- bats -->
+  <g fill="#120820">
+    <path transform="translate(548 60) scale(1.3)" d="M20 11c-3-7-10-8-18-3 5-1 9 1 10 5 3-2 6-1 8 4 2-5 5-6 8-4 1-4 5-6 10-5-8-5-15-4-18 3z"/>
+    <path transform="translate(640 30) scale(0.9)" d="M20 11c-3-7-10-8-18-3 5-1 9 1 10 5 3-2 6-1 8 4 2-5 5-6 8-4 1-4 5-6 10-5-8-5-15-4-18 3z"/>
+    <path transform="translate(770 170) scale(1.1) rotate(-12)" d="M20 11c-3-7-10-8-18-3 5-1 9 1 10 5 3-2 6-1 8 4 2-5 5-6 8-4 1-4 5-6 10-5-8-5-15-4-18 3z"/>
+    <path transform="translate(600 160) scale(0.7) rotate(10)" d="M20 11c-3-7-10-8-18-3 5-1 9 1 10 5 3-2 6-1 8 4 2-5 5-6 8-4 1-4 5-6 10-5-8-5-15-4-18 3z"/>
+    <path transform="translate(820 80) scale(0.6)" d="M20 11c-3-7-10-8-18-3 5-1 9 1 10 5 3-2 6-1 8 4 2-5 5-6 8-4 1-4 5-6 10-5-8-5-15-4-18 3z"/>
+  </g>
+  <!-- embers -->
+  <g fill="#ffb347">
+    <circle cx="520" cy="200" r="1.5" opacity="0.7"/>
+    <circle cx="590" cy="250" r="1" opacity="0.6"/>
+    <circle cx="760" cy="260" r="1.6" opacity="0.5"/>
+    <circle cx="840" cy="210" r="1.2" opacity="0.6"/>
+    <circle cx="640" cy="290" r="1" opacity="0.5"/>
+    <circle cx="700" cy="330" r="1.4" opacity="0.4"/>
+  </g>
+</svg>

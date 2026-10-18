@@ -25,6 +25,7 @@ export const PRESETS: Preset[] = [
     description: 'Whoosh, impact, crackle and shimmer.',
     recipe: defaultRecipe({
       name: 'Fireball',
+      description: 'Whoosh, impact, crackle and shimmer.',
       seed: 101,
       reverb: { amount: 0.3, size: 1.2 },
       layers: [
@@ -42,6 +43,7 @@ export const PRESETS: Preset[] = [
     description: 'Glassy crystalline chime with a cold tail.',
     recipe: defaultRecipe({
       name: 'Ice shard',
+      description: 'Glassy crystalline chime with a cold tail.',
       seed: 102,
       reverb: { amount: 0.45, size: 1.8 },
       layers: [
@@ -59,6 +61,7 @@ export const PRESETS: Preset[] = [
     description: 'Twinkling pickup or spell charge.',
     recipe: defaultRecipe({
       name: 'Sparkle',
+      description: 'Twinkling pickup or spell charge.',
       seed: 103,
       reverb: { amount: 0.4, size: 1.4 },
       layers: [
@@ -76,6 +79,7 @@ export const PRESETS: Preset[] = [
     description: 'Big low boom with debris.',
     recipe: defaultRecipe({
       name: 'Explosion',
+      description: 'Big low boom with debris.',
       seed: 201,
       reverb: { amount: 0.4, size: 1.6 },
       layers: [
@@ -92,6 +96,7 @@ export const PRESETS: Preset[] = [
     description: 'Metallic ring with a sharp transient.',
     recipe: defaultRecipe({
       name: 'Sword clash',
+      description: 'Metallic ring with a sharp transient.',
       seed: 202,
       reverb: { amount: 0.25, size: 0.9 },
       layers: [
@@ -109,6 +114,7 @@ export const PRESETS: Preset[] = [
     description: 'Short, gritty damage grunt.',
     recipe: defaultRecipe({
       name: 'Hurt',
+      description: 'Short, gritty damage grunt.',
       seed: 203,
       layers: [
         L('Body', { waveform: 'sawtooth', gain: 0.8, frequency: 420, frequencyEnd: 110, attack: 0.002, hold: 0.04, release: 0.16, filterType: 'lowpass', filterCutoff: 2500, filterCutoffEnd: 600, filterQ: 1, distortion: 0.45 }),
@@ -123,6 +129,7 @@ export const PRESETS: Preset[] = [
     description: 'Classic falling zap.',
     recipe: defaultRecipe({
       name: 'Laser',
+      description: 'Classic falling zap.',
       seed: 301,
       layers: [
         L('Zap', { waveform: 'square', gain: 0.7, duty: 0.3, frequency: 1900, frequencyEnd: 180, attack: 0.001, hold: 0.04, release: 0.16 }),
@@ -137,6 +144,7 @@ export const PRESETS: Preset[] = [
     description: 'Bouncy upward blip.',
     recipe: defaultRecipe({
       name: 'Jump',
+      description: 'Bouncy upward blip.',
       seed: 302,
       layers: [
         L('Boing', { waveform: 'square', gain: 0.7, duty: 0.5, frequency: 280, frequencyEnd: 720, attack: 0.002, hold: 0.09, release: 0.1 }),
@@ -150,6 +158,7 @@ export const PRESETS: Preset[] = [
     description: 'Two-note pickup chime.',
     recipe: defaultRecipe({
       name: 'Coin',
+      description: 'Two-note pickup chime.',
       seed: 303,
       layers: [
         L('Ding', { waveform: 'square', gain: 0.6, duty: 0.5, frequency: 988, frequencyEnd: 988, attack: 0.001, hold: 0.07, release: 0.02 }),
@@ -164,6 +173,7 @@ export const PRESETS: Preset[] = [
     description: 'Rising wobbly fanfare.',
     recipe: defaultRecipe({
       name: 'Power-up',
+      description: 'Rising wobbly fanfare.',
       seed: 304,
       layers: [
         L('Rise', { waveform: 'sawtooth', gain: 0.6, frequency: 300, frequencyEnd: 1300, vibratoRate: 22, vibratoDepth: 1.2, attack: 0.005, hold: 0.35, release: 0.2, filterType: 'lowpass', filterCutoff: 3000, filterCutoffEnd: 8000, filterQ: 1.5 }),
@@ -178,6 +188,7 @@ export const PRESETS: Preset[] = [
     description: 'Crisp, tiny button press.',
     recipe: defaultRecipe({
       name: 'UI click',
+      description: 'Crisp, tiny button press.',
       seed: 401,
       layers: [
         L('Tick', { waveform: 'sine', gain: 0.8, frequency: 2600, frequencyEnd: 1500, attack: 0.001, hold: 0.008, release: 0.03 }),
@@ -192,6 +203,7 @@ export const PRESETS: Preset[] = [
     description: 'Soft, friendly two-tone confirmation.',
     recipe: defaultRecipe({
       name: 'UI confirm',
+      description: 'Soft, friendly two-tone confirmation.',
       seed: 402,
       reverb: { amount: 0.15, size: 0.5 },
       layers: [
@@ -207,6 +219,7 @@ export const PRESETS: Preset[] = [
     description: 'Blunt, dissonant buzz for a denied action.',
     recipe: defaultRecipe({
       name: 'UI error',
+      description: 'Blunt, dissonant buzz for a denied action.',
       seed: 403,
       layers: [
         L('Buzz', { waveform: 'square', gain: 0.5, duty: 0.25, frequency: 220, frequencyEnd: 200, attack: 0.002, hold: 0.12, release: 0.05, filterType: 'lowpass', filterCutoff: 1800, filterCutoffEnd: 1200, filterQ: 1 }),
@@ -221,6 +234,7 @@ export const PRESETS: Preset[] = [
     description: 'Hydraulic hiss, heavy metal clunk, rumbling tail.',
     recipe: defaultRecipe({
       name: 'Spaceship door',
+      description: 'Hydraulic hiss, heavy metal clunk, rumbling tail.',
       seed: 501,
       reverb: { amount: 0.5, size: 2.2 },
       layers: [
@@ -238,6 +252,7 @@ export const PRESETS: Preset[] = [
     description: 'Dull thud on packed dirt.',
     recipe: defaultRecipe({
       name: 'Footstep',
+      description: 'Dull thud on packed dirt.',
       seed: 502,
       layers: [
         L('Scuff', { waveform: 'brown', gain: 0.8, attack: 0.003, hold: 0.02, release: 0.09, filterType: 'lowpass', filterCutoff: 900, filterCutoffEnd: 300, filterQ: 0.9 }),
@@ -252,6 +267,7 @@ export const PRESETS: Preset[] = [
     description: 'Distant rolling thunder.',
     recipe: defaultRecipe({
       name: 'Thunder',
+      description: 'Distant rolling thunder.',
       seed: 503,
       reverb: { amount: 0.55, size: 3 },
       layers: [

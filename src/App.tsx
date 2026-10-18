@@ -7,6 +7,7 @@ import {
   defaultLayer,
   encodeRecipeForUrl,
   encodeWav,
+  findPreset,
   mutateRecipe,
   newLayerId,
   parseRecipe,
@@ -19,12 +20,17 @@ import {
 } from './engine';
 import { playSamples, stopPlayback } from './audio/player';
 import { useHistory } from './hooks/useHistory';
+import { useTheme } from './hooks/useTheme';
 import { downloadBlob, pickFile, slugify } from './utils/download';
-import { PresetList } from './components/PresetList';
+import { PresetList, presetIcon } from './components/PresetList';
 import { LayerCard } from './components/LayerCard';
 import { Waveform } from './components/Waveform';
 import { GlobalControls } from './components/GlobalControls';
 import { Variations } from './components/Variations';
+import { BrewPrompt } from './components/BrewPrompt';
+import { Icon } from './components/Icon';
+
+type MobileTab = 'recipes' | 'studio';
 
 function initialRecipe(): { recipe: Recipe; presetId: string | null } {
   const match = /[#&]r=([^&]+)/.exec(window.location.hash);
@@ -47,6 +53,8 @@ export function App() {
   const [autoPlay, setAutoPlay] = useState(true);
   const [variations, setVariations] = useState<Recipe[]>([]);
   const [status, setStatus] = useState<string>('');
+  const [mobileTab, setMobileTab] = useState<MobileTab>('studio');
+  const [theme, toggleTheme] = useTheme();
   const firstRender = useRef(true);
 
   const samples = useMemo(() => renderRecipe(recipe, { sampleRate: DEFAULT_SAMPLE_RATE }), [recipe]);
@@ -76,7 +84,8 @@ export function App() {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const target = e.target as HTMLElement | null;
-      const typing = target && ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName) && (target as HTMLInputElement).type !== 'range';
+      const typing =
+        target && ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName) && (target as HTMLInputElement).type !== 'range';
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'z') {
         e.preventDefault();
         if (e.shiftKey) history.redo();
@@ -111,12 +120,17 @@ export function App() {
     history.set(clonePreset(preset));
     setPresetId(preset.id);
     setVariations([]);
+    setMobileTab('studio');
+  };
+
+  const resetToPreset = () => {
+    const preset = presetId ? findPreset(presetId) : undefined;
+    if (preset) history.set(clonePreset(preset));
   };
 
   const mutate = () => {
     const next = mutateRecipe(recipe, { amount: mutateAmount, seed: randomSeed() });
     history.set({ ...next, name: nextVariantName(recipe.name) });
-    setPresetId(null);
   };
 
   const brewVariations = () => {
@@ -168,31 +182,32 @@ export function App() {
     }
   };
 
+  const isPresetDirty = presetId !== null && findPreset(presetId) !== undefined;
+
   return (
-    <div className="app">
+    <div className={`app tab-${mobileTab}`}>
       <header className="topbar">
         <div className="brand">
-          <span className="brand-icon" aria-hidden>
-            🜍
+          <span className="brand-icon">
+            <Icon name="brand" size={26} />
           </span>
           <span className="brand-name">WaveCauldron</span>
+          <span className="brand-tagline">Craft. Layer. Play. Repeat.</span>
         </div>
-        <input
-          className="recipe-name"
-          value={recipe.name}
-          onChange={(e) => update({ name: e.target.value }, 'name')}
-          aria-label="Sound name"
-        />
         <div className="transport">
           <button className="primary" onClick={play} title="Play (Space)">
-            ▶ Play
+            <Icon name="play" /> Play
           </button>
-          <button onClick={stopPlayback}>■</button>
+          <button className="icon-only" onClick={stopPlayback} title="Stop">
+            <Icon name="stop" />
+          </button>
           <button onClick={mutate} title="Mutate (M)">
-            ⚗ Mutate
+            <Icon name="shuffle" /> Mutate
           </button>
-          <button onClick={brewVariations}>Brew 8 variations</button>
-          <label className="inline">
+          <button onClick={brewVariations}>
+            <Icon name="cube" /> Brew 8 variations
+          </button>
+          <label className="inline strength">
             Strength
             <input
               type="range"
@@ -202,20 +217,35 @@ export function App() {
               value={mutateAmount}
               onChange={(e) => setMutateAmount(Number(e.target.value))}
             />
+            <span className="pill">{Math.round(mutateAmount * 100)}%</span>
           </label>
-          <button onClick={history.undo} disabled={!history.canUndo} title="Undo (Ctrl+Z)">
-            ↶
+          <button className="icon-only" onClick={history.undo} disabled={!history.canUndo} title="Undo (Ctrl+Z)">
+            <Icon name="undo" />
           </button>
-          <button onClick={history.redo} disabled={!history.canRedo} title="Redo (Ctrl+Shift+Z)">
-            ↷
+          <button className="icon-only" onClick={history.redo} disabled={!history.canRedo} title="Redo (Ctrl+Shift+Z)">
+            <Icon name="redo" />
           </button>
-          <span className="spacer" />
+        </div>
+        <div className="file-actions">
           <button className="primary" onClick={exportWav}>
-            Export WAV
+            <Icon name="download" /> Export WAV
           </button>
-          <button onClick={exportJson}>Save recipe</button>
-          <button onClick={importJson}>Load recipe</button>
-          <button onClick={copyLink}>Copy link</button>
+          <button onClick={exportJson} title="Download recipe JSON">
+            <Icon name="save" /> <span className="label">Save recipe</span>
+          </button>
+          <button onClick={importJson} title="Load a recipe JSON file">
+            <Icon name="folder" /> <span className="label">Load recipe</span>
+          </button>
+          <button onClick={copyLink} title="Copy a shareable link">
+            <Icon name="link" /> <span className="label">Copy link</span>
+          </button>
+          <button
+            className="icon-only theme-toggle"
+            onClick={toggleTheme}
+            title={theme === 'october' ? 'Switch to the regular skin' : 'Switch to the October skin'}
+          >
+            <Icon name={theme === 'october' ? 'sun' : 'moon'} />
+          </button>
         </div>
       </header>
 
@@ -224,28 +254,88 @@ export function App() {
       </aside>
 
       <main className="workbench">
-        <Waveform samples={samples} sampleRate={DEFAULT_SAMPLE_RATE} />
-        <div className="workbench-options">
-          <label className="checkbox">
-            <input type="checkbox" checked={autoPlay} onChange={(e) => setAutoPlay(e.target.checked)} />
-            Auto-play on change
-          </label>
-          <span className="status" role="status">
-            {status}
-          </span>
-        </div>
+        <section className="card hero">
+          <div className="hero-top">
+            <span className="hero-icon">
+              <Icon name={presetIcon(presetId)} size={32} />
+            </span>
+            <div className="hero-text">
+              <input
+                className="recipe-name"
+                value={recipe.name}
+                onChange={(e) => update({ name: e.target.value }, 'name')}
+                aria-label="Sound name"
+              />
+              <input
+                className="recipe-desc"
+                value={recipe.description ?? ''}
+                placeholder="Describe this sound…"
+                onChange={(e) => update({ description: e.target.value }, 'description')}
+                aria-label="Sound description"
+              />
+            </div>
+            <div className="hero-actions">
+              <button className="primary" onClick={play}>
+                <Icon name="play" /> Play
+              </button>
+              <button onClick={exportWav}>
+                <Icon name="download" /> Export WAV
+              </button>
+            </div>
+          </div>
+          <Waveform samples={samples} sampleRate={DEFAULT_SAMPLE_RATE} theme={theme} />
+          <div className="hero-bottom">
+            <label className="checkbox switch">
+              <input type="checkbox" checked={autoPlay} onChange={(e) => setAutoPlay(e.target.checked)} />
+              <span className="track" />
+              Auto-play on change
+            </label>
+            <span className="status" role="status">
+              {status}
+            </span>
+            <span className="spacer" />
+            <button className="ghost" onClick={resetToPreset} disabled={!isPresetDirty} title="Reload the preset's original recipe">
+              <Icon name="reset" /> Reset to default
+            </button>
+          </div>
+        </section>
 
-        <Variations variations={variations} onUse={(v) => { history.set(v); setPresetId(null); }} onClear={() => setVariations([])} />
+        <BrewPrompt
+          current={recipe}
+          onBrewed={(brewed) => {
+            history.set(brewed);
+            setPresetId(null);
+            setVariations([]);
+            flash(`Brewed “${brewed.name}”`);
+          }}
+        />
+
+        <Variations
+          variations={variations}
+          onUse={(v) => {
+            history.set(v);
+            setPresetId(null);
+          }}
+          onClear={() => setVariations([])}
+        />
 
         <GlobalControls recipe={recipe} onPatch={update} />
 
-        <div className="layers-header">
-          <h3>Ingredients</h3>
+        <div className="section-header">
+          <span className="card-icon">
+            <Icon name="layers" size={20} />
+          </span>
+          <div>
+            <h3>Ingredients</h3>
+            <p className="muted">Layer and shape sounds to create your effect</p>
+          </div>
           <span className="spacer" />
-          <button onClick={addLayer}>+ Add layer</button>
+          <button className="primary" onClick={addLayer}>
+            <Icon name="plus" /> Add layer
+          </button>
         </div>
         {recipe.layers.length === 0 && (
-          <p className="empty">The cauldron is empty. Add a layer or pick a preset to start brewing.</p>
+          <p className="empty">The cauldron is empty. Add a layer or pick a recipe to start brewing.</p>
         )}
         {recipe.layers.map((layer, index) => (
           <LayerCard
@@ -267,8 +357,22 @@ export function App() {
       </main>
 
       <footer className="footer">
-        Space: play · M: mutate · Ctrl+Z: undo · Recipes are plain JSON and live in the URL, so a link is a save.
+        <span>Space: play · M: mutate · Ctrl+Z: undo · Recipes are plain JSON and live in the URL, so a link is a save.</span>
       </footer>
+
+      <nav className="mobile-nav" aria-label="Mobile navigation">
+        <button className={mobileTab === 'recipes' ? 'active' : ''} onClick={() => setMobileTab('recipes')}>
+          <Icon name="book" size={22} />
+          <span>Recipes</span>
+        </button>
+        <button className="play-fab" onClick={play} aria-label="Play">
+          <Icon name="play" size={26} />
+        </button>
+        <button className={mobileTab === 'studio' ? 'active' : ''} onClick={() => setMobileTab('studio')}>
+          <Icon name="layers" size={22} />
+          <span>Studio</span>
+        </button>
+      </nav>
     </div>
   );
 }
