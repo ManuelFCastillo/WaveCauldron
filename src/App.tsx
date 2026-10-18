@@ -27,6 +27,7 @@ import { LayerCard } from './components/LayerCard';
 import { Waveform } from './components/Waveform';
 import { GlobalControls } from './components/GlobalControls';
 import { Variations } from './components/Variations';
+import { BrewPrompt } from './components/BrewPrompt';
 import { Icon } from './components/Icon';
 
 type MobileTab = 'recipes' | 'studio';
@@ -298,6 +299,16 @@ export function App() {
             </button>
           </div>
         </section>
+
+        <BrewPrompt
+          current={recipe}
+          onBrewed={(brewed) => {
+            history.set(brewed);
+            setPresetId(null);
+            setVariations([]);
+            flash(`Brewed “${brewed.name}”`);
+          }}
+        />
 
         <Variations
           variations={variations}

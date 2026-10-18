@@ -654,6 +654,127 @@ label.switch input:focus-visible + .track {
 }
 
 /* ==========================================================================
+   AI brewing
+   ========================================================================== */
+
+.brew {
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-color: var(--border-strong);
+}
+
+.brew-form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brew-input {
+  flex: 1;
+  min-width: 0;
+  padding: 9px 12px;
+  font-size: 14px;
+}
+
+.brew-options {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.brew-suggestions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+button.chip {
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--bg-input);
+}
+
+button.chip:hover {
+  color: var(--text);
+}
+
+.brew-notes {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  color: var(--text);
+  font-size: 13px;
+  padding: 8px 10px;
+  background: var(--accent-soft);
+  border-radius: var(--radius-sm);
+}
+
+.brew-notes svg {
+  color: var(--accent);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.brew-error {
+  color: var(--danger);
+  font-size: 13px;
+}
+
+.brew-key {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+.brew-key label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.brew-key input {
+  max-width: 420px;
+}
+
+.spinner {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 860px) {
+  .brew-form {
+    flex-wrap: wrap;
+  }
+
+  .brew-form .card-icon {
+    display: none;
+  }
+
+  .brew-input {
+    flex-basis: 100%;
+  }
+}
+
+/* ==========================================================================
    Variations
    ========================================================================== */
 

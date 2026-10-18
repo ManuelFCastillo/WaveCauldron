@@ -3,3 +3,8 @@ dist/
 out/
 *.log
 .DS_Store
+
+# Local secrets
+.env
+.env.*
+!.env.example

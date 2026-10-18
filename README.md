@@ -16,6 +16,17 @@ Everything runs in the browser. No accounts, no uploads, no samples to license: 
 - **Two skins.** The regular teal studio, and an **October** skin (orange, purple, moon and bats) that switches on by itself during October. Toggle with the sun/moon button; the choice is remembered.
 - **Desktop and mobile.** Sidebar + toolbar on wide screens; stacked cards with a Recipes / Play / Studio bottom bar on phones.
 
+## AI brewing
+
+Type a description ("rusty drawbridge lowering", "8-bit coin pickup") into the **Brew with AI** box and Claude writes the recipe. Tick *Start from the current recipe* to refine instead: "make it punchier", "add a metallic ring at the end". The model never produces audio; it produces a recipe the engine renders, so the result is deterministic, editable, mutate-able and tiny.
+
+It needs an Anthropic API key, in one of two places:
+
+- **Server-side (recommended for a deployed app).** Set `ANTHROPIC_API_KEY` in the Vercel project's environment variables (or in `.env.local` for `npm run dev`). The key stays on the server; the browser calls `/api/brew` (`api/brew.ts`, a Vercel function that `npm run dev` also serves).
+- **Bring your own key.** Open the settings icon on the brew box and paste a key. It is kept in that browser's `localStorage` and sent straight to Anthropic, which is handy for the GitHub Pages build or a local clone with no backend.
+
+The model is `claude-opus-5-5` with structured outputs validated against the recipe schema (`src/ai/schema.ts`); values outside the engine's ranges are clamped, so a bad answer degrades into an odd sound rather than a crash.
+
 ## Getting started
 
 ```bash
