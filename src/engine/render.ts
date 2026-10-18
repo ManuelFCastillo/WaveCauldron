@@ -2,9 +2,9 @@
  * The renderer: turns a Recipe into a mono Float32Array of samples. It is pure
  * and deterministic, so the same recipe always yields the same buffer.
  */
-import type { Layer, Recipe } from './types';
-import { createRng } from './random';
-import { isNoise, layerDuration, recipeDuration } from './params';
+import type { Layer, Recipe } from './types.js';
+import { createRng } from './random.js';
+import { isNoise, layerDuration, recipeDuration } from './params.js';
 import {
   Biquad,
   applyEcho,
@@ -20,7 +20,7 @@ import {
   triangle,
   whiteNoise,
   type NoiseSource,
-} from './dsp';
+} from './dsp.js';
 
 export const DEFAULT_SAMPLE_RATE = 44100;
 /** Hard cap so a runaway recipe can't allocate gigabytes. */

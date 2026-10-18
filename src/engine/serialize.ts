@@ -3,8 +3,8 @@
  * loosely-typed input (file imports, URL hashes) and fills in any missing
  * fields with defaults so older or hand-written recipes still load.
  */
-import type { Layer, Recipe } from './types';
-import { FILTER_TYPES, LAYER_PARAMS, WAVEFORMS, clampParam, defaultLayer, defaultRecipe } from './params';
+import type { Layer, Recipe } from './types.js';
+import { FILTER_TYPES, LAYER_PARAMS, WAVEFORMS, clampParam, defaultLayer, defaultRecipe } from './params.js';
 
 export function serializeRecipe(recipe: Recipe): string {
   return JSON.stringify(recipe, null, 2);

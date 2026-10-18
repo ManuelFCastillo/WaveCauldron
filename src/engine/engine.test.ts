@@ -11,7 +11,7 @@ import {
   parseRecipe,
   recipeDuration,
   renderRecipe,
-} from './index';
+} from './index.js';
 
 const SR = 22050;
 

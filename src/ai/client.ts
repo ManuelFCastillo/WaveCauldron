@@ -3,9 +3,9 @@
  * if the user has stored their own API key, calls Claude directly instead.
  * The SDK and schema are loaded lazily so the main bundle stays small.
  */
-import { parseRecipe, type Recipe } from '../engine';
-import type { BrewRequest } from './schema';
-import type { BrewResult } from './brew';
+import { parseRecipe, type Recipe } from '../engine/index.js';
+import type { BrewRequest } from './schema.js';
+import type { BrewResult } from './brew.js';
 
 const KEY_STORAGE = 'wavecauldron.anthropicKey';
 

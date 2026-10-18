@@ -5,8 +5,8 @@
  * version) and every field is required so the schema is strict.
  */
 import { z } from 'zod';
-import { FILTER_TYPES, LAYER_PARAMS, WAVEFORMS, type Recipe } from '../engine';
-import { PRESETS } from '../engine/presets';
+import { FILTER_TYPES, LAYER_PARAMS, WAVEFORMS, type Recipe } from '../engine/index.js';
+import { PRESETS } from '../engine/presets.js';
 
 export const BrewLayer = z.object({
   name: z.string().describe('Short name for the ingredient, e.g. "Whoosh"'),

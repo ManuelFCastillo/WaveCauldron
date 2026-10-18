@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { PRESETS, LAYER_PARAMS, renderRecipe } from '../engine';
-import { BrewOutput, SYSTEM_PROMPT, buildUserMessage } from './schema';
-import { BrewError, outputToRecipe, validateBrewRequest } from './brew';
+import { PRESETS, LAYER_PARAMS, renderRecipe } from '../engine/index.js';
+import { BrewOutput, SYSTEM_PROMPT, buildUserMessage } from './schema.js';
+import { BrewError, outputToRecipe, validateBrewRequest } from './brew.js';
 
 const sample: BrewOutput = {
   name: 'Mud step',

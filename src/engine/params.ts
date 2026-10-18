@@ -1,4 +1,4 @@
-import type { Layer, NumericLayerKey, ParamSpec, Recipe, Waveform, FilterType } from './types';
+import type { Layer, NumericLayerKey, ParamSpec, Recipe, Waveform, FilterType } from './types.js';
 
 export const WAVEFORMS: Waveform[] = [
   'sine',
